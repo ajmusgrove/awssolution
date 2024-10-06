@@ -12,7 +12,7 @@ permissions:
 
 defaults:
   run:
-    working_directory: web
+    working-directory: web
 
 jobs:
   build:
