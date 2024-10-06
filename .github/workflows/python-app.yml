@@ -1,0 +1,38 @@
+
+name: Bookstore Web Front
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main: ]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working_directory: web
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.12"
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pylint pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: >
+        flake8 bookstore.py config.py
+          --count --show-source --statistics --max-line-length=127 
+    - name: Lint with pylint
+      run: pylint bootstore.py config.py
