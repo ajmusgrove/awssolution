@@ -34,4 +34,4 @@ jobs:
       run: |
         flake8 bookstore.py --count --show-source --statistics --max-line-length=127
     - name: Lint with pylint
-      run: pylint bootstore.py
+      run: pylint bookstore.py
