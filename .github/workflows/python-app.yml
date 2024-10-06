@@ -1,11 +1,11 @@
-
+---
 name: Bookstore Web Front
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main: ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -16,7 +16,7 @@ defaults:
 
 jobs:
   build:
-    
+
     runs-on: ubuntu-latest
 
     steps:
@@ -33,6 +33,6 @@ jobs:
     - name: Lint with flake8
       run: >
         flake8 bookstore.py config.py
-          --count --show-source --statistics --max-line-length=127 
+          --count --show-source --statistics --max-line-length=127
     - name: Lint with pylint
       run: pylint bootstore.py config.py
