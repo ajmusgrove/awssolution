@@ -31,8 +31,7 @@ jobs:
         pip install flake8 pylint pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
-      run: >
-        flake8 bookstore.py
-          --count --show-source --statistics --max-line-length=127
+      run: |
+        flake8 bookstore.py --count --show-source --statistics --max-line-length=127
     - name: Lint with pylint
       run: pylint bootstore.py
