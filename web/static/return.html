@@ -1,17 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Thanks for your order!</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="bookstore.css">
   <script src="return.js" defer></script>
+  <title>Thanks for your order!</title>
 </head>
 <body>
   <section id="success" class="hidden">
-    <p>
-      We appreciate your business! A confirmation email will be sent to <span id="customer-email"></span>.
-
-      If you have any questions, please email <a href="mailto:orders@example.com">orders@example.com</a>.
+    <p class="confheader">Order Confirmation</p>
+    <p class="conftablehdr">Order Details</p>
+  <div style="width: 100%; margin: auto; overflow: hidden;">
+   <div style="width: 30%; float: left; background: white;">
+    <table class="conf">
+        <tr>
+            <td class="conf">Title</td><td class="conf">{{TITLE}}</td>
+        </tr>
+        <tr>
+            <td class="conf">Author</td><td class="conf">{{AUTHOR}}</td>
+        </tr>
+        <tr>
+            <td class="conf">ISBN</td><td class="conf">{{ISBN}}</td>
+        </tr>
+        <tr>
+            <td class="conf">Price</td><td class="conf">${{PRICE}}</td>
+        </tr>
+    </table>
+   </div>
+   <div style="width: 20%; float: left; background: white;">
+        <img src="https://{{IMAGES}}/{{ISBN}}.jpg" alt-text="Book Cover" width="150" height="225"/>
+   </div>
+  </div>
+    <p class="whathappens">What happens next?</p>
+    <p class="fulfillment">Thanks you for shopping with the
+    <span class="shopname">Doubleplusgood
+    Book Shop</span>! You will shortly receive a confirmation e-mail
+        shortly with your order and delivery information. If you
+        would like to enquire about status of your order,
+        you can e-mail us at <a href="mailto:service@{{DOMAIN}}">
+        service@{{DOMAIN}}</a> Happy reading!</p>
     </p>
   </section>
+  <section id="failure" class="hidden">
+  </section>
+  <div>
+    <a class="continueshopping" href="/">Continue Shopping</a>
+  </div>
+    <hr/>
+    <p/>
+    <div class="footer">Copyright &copy; 2024 Big Brother, Inc</div>
+    <hr/>
 </body>
 </html>

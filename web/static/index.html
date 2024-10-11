@@ -7,21 +7,24 @@
     <title>Doubplusgood Bookstore</title>
   </head>
   <body>
-    <table style="#header">
+    <table class="header">
        <tr>
         <td>
-            Welcome to the Doubleplusgood Online Bookshot!
+            <div class="welcome">
+              Welcome to the Doubleplusgood Online Bookshop!</div>
         </td>
         <td>
-            IMAGE_HERE
+            <img src="logo.png" alt="House Graphic"
+              width="50" height="50">
         </td>
        </tr>
     </table>
-    <table>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Price</th>
+    <table class="books">
+        <tr class="colhead">
+          <th class="colhead">Title</th>
+          <th class="colhead">Author</th>
+          <th class="colhead">Price$</th>
+          <th class="colhead">&nbsp;</th>
         </tr>
         <tr>
         {{TABLE}}
@@ -29,7 +32,7 @@
     </table>
     <hr/>
     <p/>
-    <div id="footer">Copyright &copy; 2024 Big Brother, Inc</div>
+    <div class="footer">Copyright &copy; 2024 Big Brother, Inc</div>
     <hr/>
   </body>
 </html>
