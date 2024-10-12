@@ -1,18 +1,18 @@
 """ main code file for the Doubleplusgood Bookstore """
 
-import boto3
-from botocore.config import Config
-import botocore.exceptions
-from flask import Flask, jsonify, request
-import stripe
 import syslog
 import sys
 import os
+import stripe
+from flask import Flask, jsonify, request
+import boto3
+from botocore.config import Config
+import botocore.exceptions
 
 
 STRIPE_PUBLIC_KEY = "stripe_public_key"
 
-if not 'AWS_REGION' in os.environ:
+if 'AWS_REGION' not in os.environ:
     print('AWS_REGION not set')
     sys.exit(20)
 
@@ -107,7 +107,7 @@ def get_book(isbn):
 
     if book['Count'] != 1:
         print(f"Could not find ISBN {isbn}")
-        syslog.syslog(syslog.LOG_ERROR,f"Could not find {isbn}")
+        syslog.syslog(syslog.LOG_ERR, f"Could not find {isbn}")
         raise KeyError(f"Could not find {isbn}")
 
     item = book['Items'][0]
@@ -140,11 +140,11 @@ def final_page():
     session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
     book = get_book(session.metadata.isbn)
 
-    html = read_file(f"{STATIC_FOLDER}/return.html");
+    html = read_file(f"{STATIC_FOLDER}/return.html")
 
     price = int(book['price'])
     price_str = f'{price//100}.{price % 100}'
-    
+
     html_sub = do_substitutions(html, {
                                 'PRICE': price_str,
                                 'TITLE': book['title'],
@@ -173,7 +173,7 @@ def create_checkout_session():
         # print('count is ' + str(book['Count']))
         if book['Count'] != 1:
             print(f"Could not find ISBN {isbn}")
-            syslog.syslog(syslog.LOG_ERR,f"could not find {isbn}")
+            syslog.syslog(syslog.LOG_ERR, f"could not find {isbn}")
             return "processing error"
 
         item = book['Items'][0]
@@ -224,7 +224,9 @@ def session_status():
 
     if session.status == 'complete':
         send_to_fulfillment(session)
-        syslog.syslog(syslog.LOG_NOTICE,f"Sold a Book with ISBN {session.metadata.isbn}")
+        syslog.syslog(
+            syslog.LOG_NOTICE,
+            f"Sold a Book with ISBN {session.metadata.isbn}")
         print(f"Sold a Book with ISBN {session.metadata.isbn}")
 
     return jsonify(status=session.status,
